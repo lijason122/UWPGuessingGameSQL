@@ -1,0 +1,123 @@
+﻿<Page
+    x:Class="UWPGuessingGameSQL.GameEmulatorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGuessingGameSQL"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="using:UWPGuessingGameSQL.Model"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid  Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <RelativePanel Grid.Row="2">
+            <!--- ListView for the players name-->
+            <ListView Name="play"
+                      SelectionMode="Single"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.IsVerticalRailEnabled="True"
+                      ScrollViewer.VerticalScrollMode="Enabled"
+                      ScrollViewer.HorizontalScrollMode="Enabled"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.IsHorizontalRailEnabled="True"
+                      Margin="20">
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate x:DataType="local1:Player">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="ItemPlayerName"
+                                       Text="{x:Bind Name}"
+                                       Width="125" />
+
+                        </StackPanel>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </RelativePanel>
+
+        <!--- Table columns displaying winner, guess, and round-->
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+            Text="Winner:"
+                    Margin="0,20,0,0"
+                    Width="50"
+                    Foreground="DarkRed" />
+        <TextBlock Grid.Row="1"
+                     Grid.Column="0"
+                     x:Name="txtWinner"
+                     Text="?"
+                     TextAlignment="Center"/>
+        <TextBlock Grid.Row="0"
+                   Grid.Column="1"
+            Text="Guess:"
+                    Width="50"
+                   Margin="0,20,0,0"
+                    Foreground="DarkRed" />
+        <TextBlock Grid.Row="1"
+                     Grid.Column="1"
+                     x:Name="txtGuess"
+                     Text="?"
+                     TextAlignment="Center"
+                      />
+        <TextBlock Grid.Row="0"
+                   Grid.Column="2"
+                    Text="Round:"
+                    Width="50"
+                   Margin="0,20,0,0"
+                    Foreground="DarkRed" />
+        <TextBlock Grid.Row="1"
+                     Grid.Column="2"
+                     x:Name="txtRound"
+                     Text="1"
+                     TextAlignment="Center"
+                      />
+
+        <!--- Players input for guessing number-->
+        <TextBox Grid.Row="3"
+                     Grid.Column="1"
+                     x:Name="txtNumber"
+                     PlaceholderText="Enter Number for Player 1"
+                     Width="185"
+                     Margin="5" />
+
+        <TextBox Grid.Row="4"
+                     Grid.Column="1"
+                     x:Name="txtNumber2"
+                     PlaceholderText="Enter Number for Player 2"
+                     Width="185"
+                     Margin="5" />
+
+        <Button x:Name="btnBack"
+                Style="{StaticResource MainButtonStyle}"
+                Grid.Row="1"
+                Grid.Column="3"
+                Content="Go Back"
+                Click="OnClickBack"/>
+
+        <Button x:Name="btnEnter"
+                Style="{StaticResource MainButtonStyle}"
+                Grid.Row="4"
+                Grid.Column="2"
+                Content="Enter"
+                Click="OnClickEnter"/>
+    </Grid>
+</Page>

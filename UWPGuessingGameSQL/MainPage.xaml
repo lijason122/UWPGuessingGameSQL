@@ -1,0 +1,106 @@
+﻿<Page
+    x:Class="UWPGuessingGameSQL.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGuessingGameSQL"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:Presentation="using:UWPGuessingGameSQL.Presentation"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- 2 Rows-->
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+
+            <!--- Hamburger Button-->
+            <ToggleButton x:Name="HamburgerButton"
+                          FontFamily="Segoe MDL2 Assets"
+                          Content=""
+                          Background="Transparent"
+                          Margin="5"
+                          Padding="5"
+                          IsChecked="{Binding IsPaneOpen, ElementName=RootSplitView, Mode=TwoWay}" />
+
+            <!-- Text -->
+            <TextBlock x:Name="txtPageTitle"
+                       HorizontalAlignment="Left"
+                       Text="AppDashboard"
+                       Margin="5"
+                       Padding="5" />
+        </StackPanel>
+
+        <!-- 
+             Display Mode :
+             Inline : Shown in full size next to content
+             Overlay: Pane is displayed on top of the content 
+        -->
+        <SplitView Grid.Row="1"
+                   x:Name="RootSplitView"
+                   IsPaneOpen="True"
+                   DisplayMode="Inline"
+                   OpenPaneLength="320" >
+
+            <SplitView.Pane>
+                <ListView x:Name="lstPageNav"
+                      IsItemClickEnabled="True"
+                      ItemClick="OnClickItem">
+
+                    <!-- ItemTemplate Definition -->
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="Presentation:NavMenuItem">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <!--The icon-->
+                                <FontIcon x:Name="Glyph" 
+                                          FontSize="16"
+                                          Glyph="{x:Bind SymbolAsChar}" />
+                                <!-- Text -->
+                                <TextBlock x:Name="Text"
+                                           Grid.Column="1"
+                                           Text="{x:Bind Label}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    
+                    <!-- Navigation items shown in the pane-->
+                    <!--HOME-->
+                    <Presentation:NavMenuItem x:Name="_uiNavStart"
+                                              Label="Start Game"
+                                              Symbol="Home" />
+                    <!--VIEW-->
+                    <Presentation:NavMenuItem x:Name="_uiNavView"
+                                              Label="View Scoreboard"
+                                              Symbol="View" />
+
+                    <!--ADD-->
+                    <Presentation:NavMenuItem x:Name="_uiNavAdd"
+                                              Label="Add Player"
+                                              Symbol="Add" />
+
+                </ListView>
+
+
+            </SplitView.Pane>
+            <!--The content shown by the SplitView-->
+            <SplitView.Content>
+                <!--Create a Navigation Frame-->
+                <Frame x:Name="frmContent" 
+                       Padding="0 0 0 0"/>
+
+
+            </SplitView.Content>
+
+        </SplitView>
+    </Grid>
+</Page>

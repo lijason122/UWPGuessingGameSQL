@@ -1,0 +1,82 @@
+﻿<Page
+    x:Class="UWPGuessingGameSQL.ScoreboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGuessingGameSQL"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="using:UWPGuessingGameSQL.Model"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid  Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+
+        <RelativePanel>
+            <!--- ListView for the player list-->
+            <ListView Name="playerList"
+                      SelectionMode="Single"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.IsVerticalRailEnabled="True"
+                      ScrollViewer.VerticalScrollMode="Enabled"
+                      ScrollViewer.HorizontalScrollMode="Enabled"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.IsHorizontalRailEnabled="True"
+                      Margin="20">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="PlayerName"
+                                       Margin="8,0"
+                                       Width="100"
+                                       Foreground="DarkRed" />
+                            <TextBlock Text="WinCount"
+                                       Width="100"
+                                       Foreground="DarkRed" />
+
+                            <TextBlock Text="LossCount"
+                                       Width="100"
+                                       Foreground="DarkRed" />
+
+                            <TextBlock Text="TieCount"
+                                       Width="100"
+                                       Foreground="DarkRed" />
+
+                            <Button x:Name="btnStart"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Content="Start Game"
+                                    Click="OnClickStart"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <!--- Data values from the playerList object-->
+                    <DataTemplate x:DataType="local1:Player">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="ItemPlayerName"
+                                       Text="{x:Bind Name}"
+                                       Width="125" />
+                            <TextBlock Name="ItemWinCount"
+                                       Text="{x:Bind Wins}"
+                                       
+                                       Width="100" />
+                            <TextBlock Name="ItemLossCount"
+                                       Text="{x:Bind Losses}"
+                                       Width="100" />
+                            <TextBlock Name="ItemTieCount"
+                                       Text="{x:Bind Ties}"
+                                       Width="100" />
+
+                        </StackPanel>
+                        
+                    </DataTemplate>
+                    
+                </ListView.ItemTemplate>
+                
+            </ListView>
+            
+        </RelativePanel>
+        
+    </Grid>
+    
+</Page>
